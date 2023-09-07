@@ -1,5 +1,5 @@
 <x-app>
-    <div class="mx-[10%]">
+    <div class="mx-[10%] mt-8">
         @if (session()->has('success'))
         <div class="p-4 bg-green-500 text-white mt-3">
             {{ Session::get('success') }}
@@ -7,6 +7,7 @@
         @endif
         
         <div class="p-6">
+            <h1 class="text-2xl font-bold mb-1">Create Task</h1>
             <form action="{{ route('task.create') }}" method="post">
                 @csrf
                 <input type="text" name="name" class="border rounded w-auto p-3" placeholder="Enter task name">
@@ -22,7 +23,7 @@
                 <p>Priority: {{ $taskValue->priority }}</p>
                 <div class="mt-2">
 
-                    <a href="#">Edit</a>
+                    <a href="{{ route('task.edit', $taskValue->id) }}">Edit</a>
                     <form action="{{ route('task.delete', $taskValue->id) }}" method="post">
                         @method('delete')
                         @csrf

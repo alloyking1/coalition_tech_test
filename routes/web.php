@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::prefix('/task')->group(function () {
     Route::get('/', [TaskController::class, 'index'])->name('task.index');
-    Route::post('/create', [TaskController::class, 'create'])->name('task.create');
+    Route::post('/save/{id?}', [TaskController::class, 'createOrUpdate'])->name('task.create');
     Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('task.edit');
     Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('task.delete');
 });

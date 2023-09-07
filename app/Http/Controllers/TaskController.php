@@ -16,7 +16,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function create(TaskRequest $request)
+    public function createOrUpdate(TaskRequest $request)
     {
         Task::updateOrCreate(
             [
@@ -25,7 +25,18 @@ class TaskController extends Controller
             $request->validated()
         );
 
-        return redirect()->back()->with('success', 'task created');
+        if ($request->id == null) {
+            return redirect()->back()->with('success', 'task created');
+        } else {
+            return redirect()->route('task.index')->with('success', 'task created');
+        }
+    }
+
+    public function edit($id)
+    {
+        return view('task.edit', [
+            'task' => Task::find($id)
+        ]);
     }
 
     public function delete($id)
